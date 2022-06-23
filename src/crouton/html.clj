@@ -2,7 +2,9 @@
   (:import [org.jsoup Jsoup]
            [org.jsoup.nodes
             Attribute Attributes Comment DataNode
-            Document Element TextNode]))
+            Document Element TextNode]
+           (java.io File)
+           (java.net URL)))
 
 (defn- join-adjacent-strings [coll]
   (reverse
@@ -61,5 +63,19 @@
 
 (defn parse-string
   "Reads and parses the HTML from a suplied source text."
-  [string]
+  [^String string]
   (as-clojure (Jsoup/parse string)))
+
+(defn parse-file
+  "Reads and parses the HTML from a suplied source file."
+  ([^File file]
+   (parse-file file "UTF-8"))
+  ([^File file ^String charsetName]
+   (as-clojure (Jsoup/parse file charsetName))))
+
+(defn parse-url
+  "Reads and parses the HTML from a suplied source URL."
+  ([^URL url]
+   (parse-url url 1000))
+  ([^URL url timeout]
+   (as-clojure (Jsoup/parse url (Integer/valueOf timeout)))))

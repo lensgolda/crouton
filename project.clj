@@ -1,4 +1,4 @@
-(defproject crouton "0.1.2"
+(defproject crouton "0.1.3-SNAPSHOT"
   :description "A HTML parsing library"
   :url "https://github.com/weavejester/crouton"
   :license {:name "Eclipse Public License"
